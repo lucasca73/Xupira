@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://bufr1hi2hshgm"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_5m0nq"]
+[ext_resource type="Texture2D" uid="uid://dnmlith84hsln" path="res://player_0.png" id="1_cjt0s"]
+[ext_resource type="Script" path="res://addons/smoothing/smoothing_2d.gd" id="2_rqbv1"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g64y3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_cjt0s")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_eogk4"]
+radius = 18.0
+
+[node name="Player" type="CharacterBody2D"]
+position = Vector2(0, -3)
+motion_mode = 1
+script = ExtResource("1_5m0nq")
+metadata/_edit_group_ = true
+
+[node name="Smoothing2D" type="Node2D" parent="."]
+script = ExtResource("2_rqbv1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Smoothing2D"]
+sprite_frames = SubResource("SpriteFrames_g64y3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 15)
+shape = SubResource("CircleShape2D_eogk4")

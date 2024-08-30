@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://3r1p1lgmeicn"]
+
+[ext_resource type="PackedScene" uid="uid://bufr1hi2hshgm" path="res://player.tscn" id="1_quln5"]
+
+[sub_resource type="Gradient" id="Gradient_twosj"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_vyh1c"]
+noise_type = 3
+seed = 2
+frequency = 0.1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ebml3"]
+color_ramp = SubResource("Gradient_twosj")
+noise = SubResource("FastNoiseLite_vyh1c")
+
+[node name="Main" type="Node"]
+
+[node name="Player" parent="." instance=ExtResource("1_quln5")]
+position = Vector2(398, 285)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(1, 15)
+limit_smoothed = true
+position_smoothing_enabled = true
+position_smoothing_speed = 1.0
+rotation_smoothing_enabled = true
+rotation_smoothing_speed = 1.0
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+position = Vector2(653, 450)
+scale = Vector2(0.109412, 0.0605032)
+texture = SubResource("NoiseTexture2D_ebml3")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(669, 105)
+scale = Vector2(0.205322, 0.154118)
+texture = SubResource("NoiseTexture2D_ebml3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(150, 466)
+scale = Vector2(0.453125, 0.392578)
+texture = SubResource("NoiseTexture2D_ebml3")
