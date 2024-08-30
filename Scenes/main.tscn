@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://3r1p1lgmeicn"]
 
-[ext_resource type="PackedScene" uid="uid://bufr1hi2hshgm" path="res://player.tscn" id="1_quln5"]
+[ext_resource type="PackedScene" uid="uid://bufr1hi2hshgm" path="res://Scenes/player.tscn" id="1_quln5"]
 
 [sub_resource type="Gradient" id="Gradient_twosj"]
 
