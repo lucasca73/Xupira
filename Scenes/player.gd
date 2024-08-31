@@ -14,14 +14,13 @@ func _ready():
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-	
-	if Input.is_action_just_pressed("attack"):
-		_attack()
-	
 	var direction = _read_direction_from_input()
 	var new_velocity = velocity + direction * delta * speed
 	velocity.x = clamp(new_velocity.x, -max_speed, max_speed)
 	velocity.y = clamp(new_velocity.y, -max_speed, max_speed)
+	
+	if Input.is_action_just_pressed("attack"):
+		_attack()
 	
 	# Update current position
 	move_and_slide()
@@ -67,6 +66,8 @@ func _read_direction_from_input():
 	return direction
 	
 func _attack():
+	velocity = Vector2(0, 0)
+	
 	var box = attack_hit_box.instantiate()
 	var distance = 60
 	box.attacker = self

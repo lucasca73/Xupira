@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://3r1p1lgmeicn"]
+[gd_scene load_steps=6 format=3 uid="uid://3r1p1lgmeicn"]
 
 [ext_resource type="PackedScene" uid="uid://bufr1hi2hshgm" path="res://Scenes/player.tscn" id="1_quln5"]
+[ext_resource type="PackedScene" uid="uid://jr6yhkiieiqw" path="res://Scenes/Mob.tscn" id="2_drra4"]
 
 [sub_resource type="Gradient" id="Gradient_twosj"]
 
@@ -40,3 +41,6 @@ texture = SubResource("NoiseTexture2D_ebml3")
 position = Vector2(150, 466)
 scale = Vector2(0.453125, 0.392578)
 texture = SubResource("NoiseTexture2D_ebml3")
+
+[node name="Mob" parent="." instance=ExtResource("2_drra4")]
+position = Vector2(143, 150)
