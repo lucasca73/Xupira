@@ -4,12 +4,20 @@ var max_speed = 150
 var speed = 3000
 var drag = 30
 
+var attack_hit_box = preload("res://Scenes/AttackBox.tscn")
+
+var lastDirection: Vector2 = Vector2(0, 0)
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
-
+	pass
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
+	
+	if Input.is_action_just_pressed("attack"):
+		_attack()
+	
 	var direction = _read_direction_from_input()
 	var new_velocity = velocity + direction * delta * speed
 	velocity.x = clamp(new_velocity.x, -max_speed, max_speed)
@@ -52,4 +60,16 @@ func _read_direction_from_input():
 		direction.y -= 1
 	if Input.is_action_pressed("move_down"):
 		direction.y += 1
+	
+	if direction.x != 0 || direction.y != 0:
+		lastDirection = direction
+		
 	return direction
+	
+func _attack():
+	var box = attack_hit_box.instantiate()
+	var distance = 60
+	box.attacker = self
+	box.scale = Vector2(2,2)
+	box.position = self.position + (distance * lastDirection)
+	owner.add_child(box) # Adding in the world

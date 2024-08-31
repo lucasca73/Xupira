@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://mblabunpq32a"]
+
+[ext_resource type="Script" path="res://Scenes/attack_box.gd" id="1_r21wi"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ptv3u"]
+radius = 6.32456
+
+[node name="AttackBox" type="Area2D"]
+script = ExtResource("1_r21wi")
+metadata/_edit_group_ = true
+
+[node name="Area2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ptv3u")
+debug_color = Color(0.994853, 0, 0.215262, 0.42)

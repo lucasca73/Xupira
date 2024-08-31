@@ -22,7 +22,6 @@ radius = 18.0
 position = Vector2(0, -3)
 motion_mode = 1
 script = ExtResource("1_5m0nq")
-metadata/_edit_group_ = true
 
 [node name="Smoothing2D" type="Node2D" parent="."]
 script = ExtResource("2_rqbv1")
