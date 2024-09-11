@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scenes/mob.gd" id="1_wiuld"]
 [ext_resource type="Texture2D" uid="uid://c72h5gl8rrv3w" path="res://Assets/mob_0.png" id="1_yxqrx"]
-[ext_resource type="PackedScene" uid="uid://c57tj541b5es0" path="res://Scenes/MobBehaviorStateMachine.tscn" id="2_cdlsi"]
+[ext_resource type="PackedScene" uid="uid://c33boq1uo0e8w" path="res://Scenes/MobBehaviorStateMachine.tscn" id="2_cdlsi"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_0ora2"]
 animations = [{

@@ -1,13 +1,17 @@
 extends Node
 
+# SIGNALS
 signal inside_attack_range(body)
 signal explore_position(position)
 signal follow_target(body)
 
+# CONSTANTS
 var idle = "idle"
 var attack = "attack"
 var follow = "follow"
 var explore = "explore"
+
+var behavior = BehaviorState.new()
 
 @export var parent: CharacterBody2D
 
@@ -16,10 +20,14 @@ var target: CharacterBody2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	behavior.behavior_ended.connect(_on_behavior_state_behavior_ended)
 	startIdle()
 	
+func _process(delta):
+	behavior.process(delta) # Update behavior duration
+	
 func startIdle():
-	$BehaviorState.start_state(idle, 4)
+	behavior.start_state(idle, 4)
 	#$ExploreRange.disable_mode = true
 	#$AttackRange.disable_mode = true
 	#$FollowRange.disable_mode = true
@@ -32,7 +40,7 @@ func startExploreLastTargetPosition():
 	next_position = target.global_position	# Last seen at
 	target = null
 	explore_position.emit(next_position)
-	$BehaviorState.start_state(explore, 10) # Basically until it gets in the destination
+	behavior.start_state(explore, 10) # Basically until it gets in the destination
 
 func prepareNextPosition():
 	var rangeScale = $ExploreRange/CollisionShape2D.scale
@@ -43,18 +51,18 @@ func prepareNextPosition():
 func startExplore():
 	prepareNextPosition()
 	explore_position.emit(next_position)
-	$BehaviorState.start_state(explore, 4)
+	behavior.start_state(explore, 4)
 	#$ExploreRange.disable_mode = false
 	#$FollowRange.disable_mode = false
 	
 func startFollow():
-	$BehaviorState.start_state(follow, 2)
+	behavior.start_state(follow, 2)
 	#$AttackRange.disable_mode = false
 	#$FollowRange.disable_mode = false
 	follow_target.emit(target)
 	
 func startAttack():
-	$BehaviorState.start_state(attack, 1)
+	behavior.start_state(attack, 1)
 
 func _on_behavior_state_behavior_ended(name):
 	if name == idle:
@@ -91,10 +99,10 @@ func _on_follow_range_body_entered(body):
 	if target != null:
 		return # Should not change targets
 
-	if [idle, explore, attack, follow].has($BehaviorState.behaviorName):
+	if [idle, explore, attack, follow].has(behavior.behaviorName):
 		target = body
-		$BehaviorState.end_state()
+		behavior.end_state()
 
 func _on_attack_range_body_entered(body):
-	if [follow].has($BehaviorState.behaviorName) && body == target:
+	if [follow].has(behavior.behaviorName) && body == target:
 		inside_attack_range.emit(body)

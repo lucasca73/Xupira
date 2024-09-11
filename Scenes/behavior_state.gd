@@ -1,23 +1,29 @@
 extends Node
+class_name BehaviorState
 
 signal behavior_ended(name)
+
+var debug = false
 
 var behaviorName: String
 var behaviorDuration: float
 var ended = true
 
+func _init():
+	pass
+
 func start_state(name, duration):
 	behaviorDuration = duration
 	behaviorName = name
 	ended = false
-	print_debug("[state] ", name)
+	if debug:
+		print_debug("[started state] ", name)
 
 func end_state():
 	ended = true
 	behavior_ended.emit(behaviorName)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta):
+func process(delta):
 	if ended == true:
 		return
 	

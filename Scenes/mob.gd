@@ -22,7 +22,7 @@ func _physics_process(delta):
 		
 		if reachedDestination:
 			frame_velocity = Vector2.ZERO
-			$MobBehaviorStateMachine/BehaviorState.end_state()
+			$MobBehaviorStateMachine.behavior.end_state()
 		else:
 			frame_velocity = nextPosition.normalized() * walk # Continue walking
 	
