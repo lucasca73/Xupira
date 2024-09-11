@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dd341ipqfu76o"]
+
+[ext_resource type="Script" path="res://Scenes/behavior_state.gd" id="1_rhsv5"]
+
+[node name="BehaviorState" type="Node"]
+script = ExtResource("1_rhsv5")

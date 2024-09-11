@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://jr6yhkiieiqw"]
+[gd_scene load_steps=7 format=3 uid="uid://jr6yhkiieiqw"]
 
 [ext_resource type="Script" path="res://Scenes/mob.gd" id="1_wiuld"]
 [ext_resource type="Texture2D" uid="uid://c72h5gl8rrv3w" path="res://Assets/mob_0.png" id="1_yxqrx"]
+[ext_resource type="PackedScene" uid="uid://c57tj541b5es0" path="res://Scenes/MobBehaviorStateMachine.tscn" id="2_cdlsi"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_0ora2"]
 animations = [{
@@ -24,6 +25,9 @@ radius = 395.41
 [node name="Mob" type="CharacterBody2D"]
 script = ExtResource("1_wiuld")
 
+[node name="MobBehaviorStateMachine" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("2_cdlsi")]
+parent = NodePath("..")
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_0ora2")
 
@@ -32,10 +36,15 @@ position = Vector2(-1, 7)
 shape = SubResource("CapsuleShape2D_sa3s4")
 
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
 shape = SubResource("CircleShape2D_bc3qb")
 debug_color = Color(1, 1, 0, 0.054902)
 
+[connection signal="explore_position" from="MobBehaviorStateMachine" to="." method="_on_mob_behavior_state_machine_explore_position"]
+[connection signal="follow_target" from="MobBehaviorStateMachine" to="." method="_on_mob_behavior_state_machine_follow_target"]
+[connection signal="inside_attack_range" from="MobBehaviorStateMachine" to="." method="_on_mob_behavior_state_machine_inside_attack_range"]
 [connection signal="body_entered" from="Area2D" to="." method="_character_entered_on_aware_area"]
 [connection signal="body_exited" from="Area2D" to="." method="_character_exited_on_aware_area"]

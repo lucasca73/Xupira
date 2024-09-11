@@ -44,3 +44,6 @@ texture = SubResource("NoiseTexture2D_ebml3")
 
 [node name="Mob" parent="." instance=ExtResource("2_drra4")]
 position = Vector2(143, 150)
+
+[node name="Mob2" parent="." instance=ExtResource("2_drra4")]
+position = Vector2(729, 249)
